@@ -14,14 +14,14 @@ from itertools import chain
 
 class emailHandler():
 
-    def __init__(self, server, port, user, password):
+    def __init__(self, server, port, user, password, admin_email):
         self.server = server
         self.port = port
         self.user = user
         self.password = password
 
         # Restrict mail search
-        self.criteria = {'FROM': 'developer2334@gmail.com'}
+        self.criteria = {'FROM': admin_email}
 
         # connect to server
         logging.debug('connecting to ' + self.server)

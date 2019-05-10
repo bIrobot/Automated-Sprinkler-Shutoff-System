@@ -28,6 +28,7 @@ class sprinkler():
         self.server = ''
         self.username = ''
         self.password = ''
+        self.admin_email = ''
 
         self.sprinkler_enabled = True
         self.disabled_time = 0
@@ -36,7 +37,7 @@ class sprinkler():
 
         self.load_config()
         self.weather = weather_handler.darkSky(self.api_key, self.latitude, self.longitude, self.checkIncrement, self.daysDisabled, self.precip_threshold)
-        self.email = email_handler.emailHandler(self.server, 993, self.username, self.password)
+        self.email = email_handler.emailHandler(self.server, 993, self.username, self.password, self.admin_email)
 
     def main(self):
         email_recieved, email_time = self.email.get_email()
@@ -124,6 +125,7 @@ class sprinkler():
             self.server = config['DEFAULT']['server']
             self.username = config['DEFAULT']['username']
             self.password = config['DEFAULT']['password']
+            self.admin_email = config['DEFAULT']['admin_email']
             self.daysDisabled = int(float(config['DEFAULT']['days_disabled']))
             self.checkIncrement = int(float(config['DEFAULT']['check_increment']))
 
@@ -137,6 +139,7 @@ class sprinkler():
             self.server = input("Enter mail server address: ")
             self.username = input("Enter email address: ")
             self.password = input("Enter email password: ")
+            self.admin_email = input("Enter email to accept commands from: ")
             self.daysDisabled = int(input("Enter number of days to disable system prior/after rain (between 1 and 7): "))
             self.checkIncrement = 86400 / int(input("Enter number of times you want to check forecast per 24-hour period (try 24, or once per hour): "))
 
@@ -148,6 +151,7 @@ class sprinkler():
                 'server': self.server,
                 'username': self.username,
                 'password': self.password,
+                'admin_email': self.admin_email,
                 'days_disabled': self.daysDisabled,
                 'check_increment': self.checkIncrement
             }
