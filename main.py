@@ -40,7 +40,12 @@ class sprinkler():
         self.email = email_handler.emailHandler(self.server, 993, self.username, self.password, self.admin_email)
 
     def main(self):
-        email_recieved, email_time = self.email.get_email()
+        try:
+            email_recieved, email_time = self.email.get_email()
+        except:
+            email_recieved = False
+            email_time = 0
+            print("Error recieving email.")
 
         if (email_recieved):
             self.prev_time_email = time.time()
