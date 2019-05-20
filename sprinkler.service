@@ -1,0 +1,24 @@
+[Unit]
+Description=Automated Sprinkler Shutoff System
+Requires=network.target
+After=network.target
+After=getty.service
+After=lightdm.service
+
+[Service]
+ExecStartPre=/bin/sleep 5
+ExecStartPre=/usr/bin/clear
+ExecStartPre=/bin/chvt 20
+ExecStart=/usr/bin/python3 -u main.py
+WorkingDirectory=/home/pi/automated-sprinkler-shutoff-system
+StandardInput=tty-force
+TTYVHangup=yes
+TTYPath=/dev/tty20
+TTYReset=yes
+Type=simple
+RemainAfterExit=false
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
