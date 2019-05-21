@@ -126,7 +126,7 @@ class sprinkler():
             self.api_key = config['DEFAULT']['api_key']
             self.latitude = config['DEFAULT']['latitude']
             self.longitude = config['DEFAULT']['longitude']
-            self.precip_threshold = int(float(config['DEFAULT']['precip_threshold']))
+            self.precip_threshold = float(config['DEFAULT']['precip_threshold'])
             self.server = config['DEFAULT']['server']
             self.username = config['DEFAULT']['username']
             self.password = config['DEFAULT']['password']
